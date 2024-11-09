@@ -1,19 +1,28 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Elements")]
+    [SerializeField] private MobileJoystick playerJoystick;
+    [SerializeField] private float moveSpeed;
+
+    [Header(" Settings ")]
     private Rigidbody2D rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb= GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.right;
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        rb.velocity = playerJoystick.GetMoveVector() * moveSpeed * Time.deltaTime;
     }
 }
+
