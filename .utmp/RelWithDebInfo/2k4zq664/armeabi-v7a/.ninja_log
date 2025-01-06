@@ -1,0 +1,12 @@
+# ninja log v5
+230	1212	7569939940467943	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	90f1703661948bcc
+54	1839	7569939947216997	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6c1c8ce2e08024ef
+39	1880	7569939947656878	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	67039723f1882b22
+1	1912	7569939948126519	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	a12913a5277911bb
+1214	2000	7569939948979639	C:/2nd semester-3rd year/Unity/Kawaii-Survivor/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k4zq664/obj/armeabi-v7a/libswappywrapper.so	1063cb51f013b908
+12	2061	7569939949619027	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	74bc30b9468ccf52
+108	2112	7569939950196795	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	eba2765e2e4fff19
+91	2119	7569939950232297	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	5ba755c87bba595e
+76	2369	7569939952759547	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	96b32bc1d469377c
+24	2435	7569939953447183	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	bc34e68a77b3eca0
+2435	2537	7569939954427230	C:/2nd semester-3rd year/Unity/Kawaii-Survivor/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k4zq664/obj/armeabi-v7a/libgame.so	28048a1ff00102d9
