@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3139192981798834831}
   - component: {fileID: 3933573120599599216}
   - component: {fileID: 2979171073329699648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawn Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 4344565407537635948}
   - component: {fileID: 4210528237914045715}
   - component: {fileID: 3082336983315138129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 595818668030650936}
   - component: {fileID: 5052542795078759008}
   - component: {fileID: 4568064212585576780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pass Away Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5104,7 +5104,8 @@ GameObject:
   - component: {fileID: 195929199161039118}
   - component: {fileID: 5083676716688622464}
   - component: {fileID: 5870655321467630689}
-  m_Layer: 0
+  - component: {fileID: 4085817749325756024}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5160,4 +5161,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d6eecdecfb2da488f0e0e958b3756b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
+--- !u!58 &4085817749325756024
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241881705894829366}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.021158874, y: 0.304687}
+  m_Radius: 0.46191403
