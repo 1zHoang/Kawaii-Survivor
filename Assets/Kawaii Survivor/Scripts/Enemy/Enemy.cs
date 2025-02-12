@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 [RequireComponent (typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
@@ -8,6 +9,11 @@ public class Enemy : MonoBehaviour
 
     [Header("Elements")]
     private Player player;
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth;
+    private int health;
+    [SerializeField] private TextMeshPro healthText;
 
     [Header("Spawn")]
     [SerializeField] private SpriteRenderer renderer1;
@@ -29,6 +35,9 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        health = maxHealth;
+        healthText.text = health.ToString();
+
         movement = GetComponent<EnemyMovement>();
 
         player = FindFirstObjectByType<Player>();
@@ -100,6 +109,17 @@ public class Enemy : MonoBehaviour
     {
         attackTimer = 0;
         player.TakeDamage(damage);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int realDamage = Mathf.Min(damage, health);
+        health -= realDamage;
+
+        healthText.text = health.ToString();
+
+        if (health <= 0)
+            PassAway();
     }
 
     private void PassAway()

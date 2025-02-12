@@ -1,8 +1,30 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    enum State
+    {
+        Idle,
+        Attack
+    }
+
+    private State state;
+
+    [Header("Elements")]
+    [SerializeField] private Transform hitDetectionTransform;
+    [SerializeField] private float hitDetectionRadius;
+
+    [Header("Attack")]
+    [SerializeField] private int damage;
+    [SerializeField] private float attackDelay;
+    [SerializeField] private Animator animator;
+
+    private float attackTimer;
+    private List<Enemy> damgedEnemies = new List<Enemy>();
+
     [Header("Settings")]
     [SerializeField] private float range;
     [SerializeField] private LayerMask ememyMask;
@@ -12,13 +34,66 @@ public class Weapon : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        state = State.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-        AutoAim();
+        switch (state)
+        {
+            case State.Idle:
+                AutoAim();
+                return;
+
+            case State.Attack:
+                Attacking();
+                return;
+        }
+    }
+
+    [NaughtyAttributes.Button]
+    private void StartAttack()
+    {
+        animator.Play("Attack");
+        state = State.Attack;
+
+        damgedEnemies.Clear();
+    }
+
+    private void Attacking()
+    {
+        Attack();
+    }
+
+    private void StopAttack()
+    {
+        state = State.Idle;
+
+        // Clear the attacked enemies
+        damgedEnemies.Clear();
+        // Damage enemies list
+    }
+
+    private void Attack()
+    {
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(hitDetectionTransform.position, hitDetectionRadius, ememyMask);
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Enemy enemy = enemies[i].GetComponent<Enemy>();
+
+            // 1. Is the enemy inside of the list
+            if (!damgedEnemies.Contains(enemy))
+            {
+                enemy.TakeDamage(damage);
+                damgedEnemies.Add(enemy);
+            }
+            // 2. If no, let's attack him, and add him to the list
+
+            // 3. If yes, let's continue, check the next enemy
+            
+        }
     }
 
     private void AutoAim()
@@ -28,9 +103,30 @@ public class Weapon : MonoBehaviour
         Vector2 targetUpVector = Vector3.up;
 
         if (cloestEnemy != null)
+        {
             targetUpVector = (cloestEnemy.transform.position - transform.position).normalized;
+            ManageAttack();
+        }
 
         transform.up = Vector3.Lerp(transform.up, targetUpVector, Time.deltaTime * aimLerp);
+
+        IncrementAttackTimer();
+    }
+
+    private void ManageAttack()
+    {
+        attackTimer += Time.deltaTime;
+
+        if (attackTimer > attackDelay)
+        {
+            attackTimer = 0;
+            StartAttack();
+        }
+    }
+
+    private void IncrementAttackTimer()
+    {
+        attackTimer += Time.deltaTime;
     }
 
     private Enemy GetCloestEnemy()
@@ -62,5 +158,8 @@ public class Weapon : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, range);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(hitDetectionTransform.position, hitDetectionRadius);
     }
 }
