@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Elements")]
     [SerializeField] private Slider healthSlider;
-    [SerializeField] private TextMeshProUGUI healthText;
+    //[SerializeField] private TextMeshProUGUI healthText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -48,6 +48,6 @@ public class PlayerHealth : MonoBehaviour
     {
         float healthBarValue = (float)health / maxHealth;
         healthSlider.value = healthBarValue;
-        healthText.text = health + " / " + maxHealth;
+        //healthText.text = health + " / " + maxHealth;
     }
 }

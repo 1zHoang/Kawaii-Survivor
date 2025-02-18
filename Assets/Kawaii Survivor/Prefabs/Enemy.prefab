@@ -5323,6 +5323,7 @@ MonoBehaviour:
   healthText: {fileID: 7849116672250107685}
   renderer1: {fileID: 4210528237914045715}
   sqawnPositon: {fileID: 3933573120599599216}
+  collider: {fileID: 4085817749325756024}
   damage: 1
   attackFrequence: 1
   playerDetectionRadius: 0.5
@@ -5348,7 +5349,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4241881705894829366}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
