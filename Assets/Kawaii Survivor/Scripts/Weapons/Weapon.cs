@@ -59,6 +59,8 @@ public class Weapon : MonoBehaviour
         state = State.Attack;
 
         damgedEnemies.Clear();
+
+        animator.speed = 1f / attackDelay;
     }
 
     private void Attacking()
