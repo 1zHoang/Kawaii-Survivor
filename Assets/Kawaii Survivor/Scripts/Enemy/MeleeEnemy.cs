@@ -3,7 +3,7 @@ using TMPro;
 using System;
 
 [RequireComponent (typeof(EnemyMovement))]
-public class Enemy : MonoBehaviour
+public class MeleeEnemy : MonoBehaviour
 {
     [Header("Components")]
     private EnemyMovement movement;
@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
     [Header("Health")]
     [SerializeField] private int maxHealth;
     private int health;
-    [SerializeField] private TextMeshPro healthText;
 
     [Header("Spawn")]
     [SerializeField] private SpriteRenderer renderer1;
@@ -41,7 +40,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        healthText.text = health.ToString();
 
         movement = GetComponent<EnemyMovement>();
 
@@ -92,10 +90,15 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!renderer1.enabled)
+            return;
+
         if (attackTimer > attackDelay)
             TryAttack();
         else
             Wait();
+
+        movement.FollowPlayer();
     }
     private void TryAttack()
     {
@@ -122,8 +125,6 @@ public class Enemy : MonoBehaviour
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
-
-        healthText.text = health.ToString();
 
         onDamageTaken?.Invoke(damage, transform.position);
 
