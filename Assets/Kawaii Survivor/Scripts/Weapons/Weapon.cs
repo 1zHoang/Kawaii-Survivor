@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Animator animator;
 
     private float attackTimer;
-    private List<MeleeEnemy> damgedEnemies = new List<MeleeEnemy>();
+    private List<Enemy> damgedEnemies = new List<Enemy>();
 
     [Header("Settings")]
     [SerializeField] private float range;
@@ -88,7 +88,7 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i < enemies.Length; i++)
         {
-            MeleeEnemy enemy = enemies[i].GetComponent<MeleeEnemy>();
+            Enemy enemy = enemies[i].GetComponent<Enemy>();
 
             // 1. Is the enemy inside of the list
             if (!damgedEnemies.Contains(enemy))
@@ -105,7 +105,7 @@ public class Weapon : MonoBehaviour
 
     private void AutoAim()
     {
-        MeleeEnemy cloestEnemy = GetCloestEnemy();
+        Enemy cloestEnemy = GetCloestEnemy();
 
         Vector2 targetUpVector = Vector3.up;
 
@@ -137,9 +137,9 @@ public class Weapon : MonoBehaviour
         attackTimer += Time.deltaTime;
     }
 
-    private MeleeEnemy GetCloestEnemy()
+    private Enemy GetCloestEnemy()
     {
-        MeleeEnemy cloestEnemy = null;
+        Enemy cloestEnemy = null;
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, range, ememyMask);
 
@@ -150,7 +150,7 @@ public class Weapon : MonoBehaviour
 
         for (int i = 0; i < enemies.Length; i++)
         {
-            MeleeEnemy enemyChecked = enemies[i].GetComponent<MeleeEnemy>();
+            Enemy enemyChecked = enemies[i].GetComponent<Enemy>();
 
             float distanceToEnemy = Vector2.Distance(transform.position, enemyChecked.transform.position);
 

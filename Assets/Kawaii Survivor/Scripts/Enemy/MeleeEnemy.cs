@@ -3,94 +3,28 @@ using TMPro;
 using System;
 
 [RequireComponent (typeof(EnemyMovement))]
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Enemy
 {
-    [Header("Components")]
-    private EnemyMovement movement;
-
-    [Header("Elements")]
-    private Player player;
-
-    [Header("Health")]
-    [SerializeField] private int maxHealth;
-    private int health;
-
-    [Header("Spawn")]
-    [SerializeField] private SpriteRenderer renderer1;
-    [SerializeField] private SpriteRenderer sqawnPositon;
-    [SerializeField] private Collider2D collider;
-    private bool hasSpawned;
-
     [Header("Attack")]
     [SerializeField] private int damage;
     [SerializeField] private float attackFrequence;
-    [SerializeField] private float playerDetectionRadius;
     private float attackDelay;
     private float attackTimer;
 
-    [Header("Actions")]
-    public static Action<int, Vector2> onDamageTaken;
-
-    [Header("Debug")]
-    [SerializeField] private bool gizmos;
-
-    [Header("Effects")]
-    [SerializeField] private ParticleSystem passAwayParticles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
-        health = maxHealth;
-
-        movement = GetComponent<EnemyMovement>();
-
-        player = FindFirstObjectByType<Player>();
-        if (player == null)
-        {
-            Debug.Log("no player");
-            Destroy(gameObject);
-        }
-        
-        StartSpawnSequence();
+        base.Start();
 
         attackDelay = 1f / attackFrequence;
         Debug.Log("attack delay: " + attackDelay);
         //Show the enemy after ... seconds
     }
 
-    private void StartSpawnSequence()
-    {
-        //Hide the renderer
-        //Show the spawn position
-        CheckSpawn(false);
-        //Scale up and down the position spawn
-        Vector3 targetScale = sqawnPositon.transform.localScale * 1.2f;
-        LeanTween.scale(sqawnPositon.gameObject, targetScale, .3f)
-            .setLoopPingPong(4)
-            .setOnComplete(SpawnSequenceComplete);
-    }
-
-    private void SpawnSequenceComplete()
-    {
-        //Hide the renderer
-        //Show the spawn position
-        CheckSpawn(true);
-        hasSpawned = true;
-
-        collider.enabled = true;
-
-        movement.StorePlayer(player);
-    }
-
-    private void CheckSpawn(bool check)
-    {
-        renderer1.enabled = check;
-        sqawnPositon.enabled= !check;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (!renderer1.enabled)
+        if(!CanAttack())
             return;
 
         if (attackTimer > attackDelay)
@@ -119,33 +53,5 @@ public class MeleeEnemy : MonoBehaviour
     {
         attackTimer = 0;
         player.TakeDamage(damage);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        int realDamage = Mathf.Min(damage, health);
-        health -= realDamage;
-
-        onDamageTaken?.Invoke(damage, transform.position);
-
-        if (health <= 0)
-            PassAway();
-    }
-
-    private void PassAway()
-    {
-        passAwayParticles.transform.SetParent(null);
-        passAwayParticles.Play();
-
-        Destroy(gameObject);
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (!gizmos)
-            return;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
     }
 }
