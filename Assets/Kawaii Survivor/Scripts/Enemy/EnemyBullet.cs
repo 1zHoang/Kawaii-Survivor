@@ -5,8 +5,9 @@ public class EnemyBullet : MonoBehaviour
 {
     [Header("Elements")]
     private Rigidbody2D rb;
-    private RangeEnemyAttack rangeEnemyAttack;
     private Collider2D collider;
+    private RangeEnemyAttack rangeEnemyAttack;
+
     [Header("Settings")]
     [SerializeField] private float moveSpeed;
     private int damage;
