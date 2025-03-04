@@ -54,6 +54,20 @@ public abstract class Weapon : MonoBehaviour
         }
         return cloestEnemy;
     }
+
+    protected int GetDamage(out bool isCriticalHit)
+    {
+        isCriticalHit = false;
+
+        if(UnityEngine.Random.Range(0, 101) <= 50)
+        {
+            isCriticalHit = true;
+            return damage * 2;
+        }
+
+        return damage;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.magenta;

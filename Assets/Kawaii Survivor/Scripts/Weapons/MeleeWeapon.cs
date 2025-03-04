@@ -110,7 +110,9 @@ public class MeleeWeapon : Weapon
             // 1. Is the enemy inside of the list
             if (!damgedEnemies.Contains(enemy))
             {
-                enemy.TakeDamage(damage);
+                int damage = GetDamage(out bool isCriticalHit);
+
+                enemy.TakeDamage(damage, isCriticalHit);
                 damgedEnemies.Add(enemy);
             }
             // 2. If no, let's attack him, and add him to the list
