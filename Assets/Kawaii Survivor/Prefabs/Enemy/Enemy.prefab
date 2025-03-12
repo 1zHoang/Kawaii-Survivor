@@ -5319,7 +5319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d6eecdecfb2da488f0e0e958b3756b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.75
 --- !u!58 &4085817749325756024
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5372,8 +5372,8 @@ MonoBehaviour:
   renderer1: {fileID: 4210528237914045715}
   sqawnPositon: {fileID: 3933573120599599216}
   collider: {fileID: 4085817749325756024}
-  damage: 1
-  attackFrequence: 1
+  passAwayParticles: {fileID: 5052542795078759008}
   playerDetectionRadius: 0.5
   gizmos: 1
-  passAwayParticles: {fileID: 5052542795078759008}
+  damage: 1
+  attackFrequence: 1

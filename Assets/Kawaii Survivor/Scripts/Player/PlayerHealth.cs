@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
 
-        Debug.Log(health);
+        //Debug.Log(health);
 
         UpdateUI();
 
@@ -42,8 +42,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void PassAway()
     {
-        Debug.Log("dead");
-        SceneManager.LoadScene(0);
+        GameManager.instance.SetGameState(GameState.GAMEOVER);
     }
 
     private void UpdateUI()

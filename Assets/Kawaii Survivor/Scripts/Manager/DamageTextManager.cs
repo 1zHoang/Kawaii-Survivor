@@ -35,14 +35,14 @@ public class DamageTextManager : MonoBehaviour
 
     private void ActionOnGet(DamageText damageText)
     {
-        Debug.Log("[POOL] Lấy DamageText từ pool");
+        //Debug.Log("[POOL] Lấy DamageText từ pool");
         damageText.gameObject.SetActive(true);
         damageText.transform.localScale = Vector3.one; // Đảm bảo không bị scale về 0
     }
 
     private void ActionOnRelease(DamageText damageText)
     {
-        Debug.Log("[POOL] Trả DamageText về pool");
+        //Debug.Log("[POOL] Trả DamageText về pool");
         damageText.gameObject.SetActive(false);
     }
 

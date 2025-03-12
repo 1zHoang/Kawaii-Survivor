@@ -17,7 +17,7 @@ public class MeleeEnemy : Enemy
         base.Start();
 
         attackDelay = 1f / attackFrequence;
-        Debug.Log("attack delay: " + attackDelay);
+        //Debug.Log("attack delay: " + attackDelay);
         //Show the enemy after ... seconds
     }
 
